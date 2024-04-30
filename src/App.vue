@@ -1,9 +1,12 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import TheHeader from "./partials/TheHeader.vue";
+</script>
 
 <template>
-  <div>
-    <h1 class="text-red-700">Hello World</h1>
-  </div>
+  <TheHeader />
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped></style>
