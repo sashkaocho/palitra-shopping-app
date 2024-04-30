@@ -3,11 +3,11 @@ import { createRouter, createWebHistory, Router } from "vue-router";
 const router: Router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", redirect: "/home" },
+    { path: "/", redirect: "/shop" },
     {
-      path: "/home",
-      name: "home",
-      component: () => import("../views/HomeView.vue"),
+      path: "/shop",
+      name: "shop",
+      component: () => import("../views/ShopView.vue"),
     },
   ],
 });
