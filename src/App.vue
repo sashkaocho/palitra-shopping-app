@@ -4,7 +4,7 @@ import TheHeader from "./partials/TheHeader.vue";
 
 <template>
   <TheHeader />
-  <main>
+  <main class="px-16 py-16">
     <RouterView />
   </main>
 </template>
