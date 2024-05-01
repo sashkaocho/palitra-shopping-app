@@ -24,12 +24,9 @@ onMounted(async (): Promise<void> => {
     const response = axios.get("http://localhost:3000/products");
 
     productStore.setProducts((await response).data);
-
-    console.log((await response).data[0]._id);
   } catch (err) {
     console.log(err);
   }
-  console.log(productStore.products);
 });
 
 const goNextPage = (): void => {
@@ -47,7 +44,6 @@ watch(
   (value): void => {
     if (!value) return;
     currentPage.value = Number(route.query?.page) || 1;
-    console.log(currentPage.value);
   },
   { immediate: true },
 );

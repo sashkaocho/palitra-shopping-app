@@ -17,10 +17,8 @@ export const useCartStore = defineStore("cart", {
       );
 
       if (!cartItem || !cartItem.quantity) return;
-      console.log(cartItem.quantity);
 
       cartItem.quantity++;
-      console.log(cartItem.quantity);
     },
     [ECartActions.DecreaseQuantity](cart_id: string): void {
       const cartItem = this.cart.find(

@@ -14,12 +14,9 @@ onMounted(async (): Promise<void> => {
     const response = axios.get("http://localhost:3000/cart");
 
     cartStore[ECartActions.SetCart]((await response).data);
-
-    console.log((await response).data);
   } catch (err) {
     console.log(err);
   }
-  console.log(cartStore.cart);
 });
 
 const increaseQuantity = (id: string | null): void => {
