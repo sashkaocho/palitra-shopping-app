@@ -1,58 +1,39 @@
 import { defineStore } from "pinia";
+import { IProduct } from "../ts/interfaces/product.interface.ts";
+import { IProductState } from "../ts/interfaces/pinia/product.interface.ts";
+import {
+  EProductActions,
+  EProductGetters,
+} from "../ts/enums/pinia/product.enum.ts";
 
 export const useProductStore = defineStore("products", {
-  state: () => ({
+  state: (): IProductState => ({
+    products: [],
     selectedProduct: null,
-    products: [
-      {
-        id: 1,
-        name: "MacBook Pro with M1 pro chip",
-        price: 1500,
-        photo:
-          "https://static.itechnics.ge/uploads/products/120ee780c8b548718edd2d705072645077562a6c11b78fb4f20b279da6219b15.png",
-      },
-      {
-        id: 2,
-        name: "MacBook Air with M1 chip",
-        price: 1000,
-      },
-      {
-        id: 3,
-        name: "MacBook Pro with M2 pro chip",
-        price: 1900,
-      },
-      {
-        id: 4,
-        name: "MacBook Pro with M2 chip",
-        price: 1200,
-      },
-      {
-        id: 5,
-        name: "MacBook Pro with M3 pro chip",
-        price: 2000,
-      },
-      {
-        id: 6,
-        name: "MacBook Pro with M1 pro chip",
-        price: 3000,
-      },
-      {
-        id: 7,
-        name: "MacBook Pro with M2 pro chip",
-        price: 1600,
-      },
-    ],
   }),
   actions: {
-    setSelectedProduct(productId: number) {
-      const product = this.products.find((product) => product.id === productId);
+    [EProductActions.SetProducts](products: IProduct[]): void {
+      this.products = products;
+    },
+    [EProductActions.SetSelectedProduct](productId: string): void {
+      const product = this.products.find(
+        (product: IProduct) => product?._id === productId,
+      ) as IProduct;
+
       if (!product) return;
-      console.log(product);
+
       this.selectedProduct = product;
     },
   },
   getters: {
-    getSelectedProduct: (state) => {
+    [EProductGetters.GetProducts]: (
+      state: IProductState,
+    ): IProductState["products"] => {
+      return state.products;
+    },
+    [EProductGetters.GetSelectedProduct]: (
+      state: IProductState,
+    ): IProductState["selectedProduct"] => {
       return state.selectedProduct;
     },
   },

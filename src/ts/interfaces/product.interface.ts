@@ -1,6 +1,8 @@
 export interface IProduct {
-  id: string | number;
+  _id: string;
   name: string;
-  price: number | string;
-  photo: string;
+  price: number;
+  gallery: string[];
+  quantity?: number;
+  cart_id?: string;
 }
