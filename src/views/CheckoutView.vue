@@ -5,6 +5,7 @@ import { IProduct } from "../ts/interfaces/product.interface.ts";
 import { ECartActions, ECartGetters } from "../ts/enums/pinia/cart.enum.ts";
 import axios from "axios";
 import router from "../router";
+import BaseButton from "../components/base/BaseButton.vue";
 
 const cartStore = useCartStore();
 
@@ -50,7 +51,7 @@ const emptyCart = (): void => {
     >
       <img
         :src="cartItem?.gallery[0]"
-        alt="not found"
+        alt=""
         class="w-[100px] h-[100px] rounded-md box-shadow-all-sides"
       />
       <div class="flex flex-col gap-6">
@@ -59,11 +60,6 @@ const emptyCart = (): void => {
       </div>
     </section>
     <h1>Total: {{ totalPrice }}$</h1>
-    <button
-      class="w-40 text-white rounded-xl bg-light-blue px-5 py-2"
-      @click.left="emptyCart"
-    >
-      Buy
-    </button>
+    <BaseButton :width="40" content="Buy" @click.left="emptyCart" />
   </main>
 </template>

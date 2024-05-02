@@ -5,6 +5,7 @@ import { useCartStore } from "../pinia/cart.pinia.ts";
 import { ECartActions, ECartGetters } from "../ts/enums/pinia/cart.enum.ts";
 import { IProduct } from "../ts/interfaces/product.interface.ts";
 import { useRouter } from "vue-router";
+import BaseButton from "../components/base/BaseButton.vue";
 
 const router = useRouter();
 
@@ -81,7 +82,7 @@ const goToCheckout = (): void => {
     >
       <img
         :src="cartItem?.gallery[0]"
-        alt="not found"
+        alt=""
         class="w-[150px] h-[150px] rounded-md box-shadow-all-sides"
       />
       <div class="flex flex-col gap-6">
@@ -112,12 +113,7 @@ const goToCheckout = (): void => {
         </h2>
       </div>
     </section>
-    <button
-      class="w-40 text-white rounded-xl bg-light-blue px-5 py-2"
-      @click="goToCheckout"
-    >
-      Checkout
-    </button>
+    <BaseButton :width="40" content="Checkout" @click="goToCheckout" />
     <p v-if="cartIsEmpty" class="text-red-700">add products to cart</p>
   </main>
 </template>

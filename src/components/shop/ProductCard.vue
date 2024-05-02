@@ -28,7 +28,7 @@ const goToProductPage = (): void => {
     <img
       v-else
       :src="image"
-      alt="not found"
+      alt=""
       class="w-full h-96 rounded-t-lg object-cover"
     />
     <section class="flex flex-col p-3 gap-2">
