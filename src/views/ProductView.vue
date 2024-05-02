@@ -9,6 +9,9 @@ const route = useRoute();
 const quantity = ref<number>(1);
 
 const selectedProduct = ref<IProduct>();
+const currentImage = ref<number>(0);
+
+const itemExistsInCart = ref<boolean>(false);
 
 onMounted(async (): Promise<void> => {
   try {
@@ -44,20 +47,46 @@ const addToCart = async (): Promise<void> => {
       cartItem,
     );
   } catch (err) {
+    itemExistsInCart.value = true;
     console.log(err);
   }
+};
+const nextPhoto = (): void => {
+  if (currentImage.value === 2) {
+    currentImage.value = 0;
+    return;
+  }
+  currentImage.value++;
+};
+
+const previousPhoto = (): void => {
+  if (currentImage.value === 0) {
+    currentImage.value = 2;
+    return;
+  }
+  currentImage.value--;
 };
 </script>
 
 <template>
   <main class="flex items-center justify-start gap-24">
-    <section class="flex items-center gap-4">
-      <div class="bg-black px-3 py-4 rounded-md cursor-pointer">
-        <i class="fa-solid fa-angle-left text-white text-xl"></i>
+    <section class="flex items-center gap-6">
+      <div
+        class="bg-black px-4 py-5 rounded-md cursor-pointer"
+        @click.left="previousPhoto"
+      >
+        <i class="fa-solid fa-angle-left text-white text-2xl"></i>
       </div>
-      <div class="w-80 h-80 bg-primary rounded-md"></div>
-      <div class="bg-black px-3 py-4 rounded-md cursor-pointer">
-        <i class="fa-solid fa-angle-right text-white text-xl"></i>
+      <img
+        :src="selectedProduct?.gallery[currentImage]"
+        alt="not found"
+        class="w-[500px] h-[500px] rounded-md box-shadow-all-sides"
+      />
+      <div
+        class="bg-black px-4 py-5 rounded-md cursor-pointer"
+        @click.left="nextPhoto"
+      >
+        <i class="fa-solid fa-angle-right text-white text-2xl"></i>
       </div>
     </section>
     <section class="flex flex-col gap-10">
@@ -81,6 +110,9 @@ const addToCart = async (): Promise<void> => {
       >
         Add to cart
       </button>
+      <p v-if="itemExistsInCart" class="text-red-700">
+        this item is already added in cart
+      </p>
     </section>
   </main>
 </template>
