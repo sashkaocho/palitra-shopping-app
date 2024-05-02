@@ -3,6 +3,9 @@ import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { IProduct } from "../ts/interfaces/product.interface.ts";
+import BaseButton from "../components/base/BaseButton.vue";
+import BaseNavButton from "../components/base/BaseNavButton.vue";
+import { ENavArrow } from "../ts/enums/application.enum.ts";
 
 const route = useRoute();
 
@@ -70,24 +73,26 @@ const previousPhoto = (): void => {
 
 <template>
   <main class="flex items-center justify-start gap-24">
-    <section class="flex items-center gap-6">
-      <div
-        class="bg-black px-4 py-5 rounded-md cursor-pointer"
+    <section class="flex items-center gap-8">
+      <BaseNavButton
+        :arrow="ENavArrow.left"
+        :height="20"
+        :width="12"
+        rounded="md"
         @click.left="previousPhoto"
-      >
-        <i class="fa-solid fa-angle-left text-white text-2xl"></i>
-      </div>
+      />
       <img
         :src="selectedProduct?.gallery[currentImage]"
-        alt="not found"
+        alt=""
         class="w-[500px] h-[500px] rounded-md box-shadow-all-sides"
       />
-      <div
-        class="bg-black px-4 py-5 rounded-md cursor-pointer"
+      <BaseNavButton
+        :arrow="ENavArrow.right"
+        :height="20"
+        :width="12"
+        rounded="md"
         @click.left="nextPhoto"
-      >
-        <i class="fa-solid fa-angle-right text-white text-2xl"></i>
-      </div>
+      />
     </section>
     <section class="flex flex-col gap-10">
       <h1>{{ selectedProduct?.name }}</h1>
@@ -104,12 +109,7 @@ const previousPhoto = (): void => {
           @click.left="increaseQuantity"
         ></i>
       </div>
-      <button
-        class="w-64 bg-light-blue text-white border border-light-blue rounded-md px-8 py-2 cursor-pointer transition-all hover:bg-white hover:text-light-blue"
-        @click.left="addToCart"
-      >
-        Add to cart
-      </button>
+      <BaseButton :width="64" content="Add to cart" @click.left="addToCart" />
       <p v-if="itemExistsInCart" class="text-red-700">
         this item is already added in cart
       </p>
