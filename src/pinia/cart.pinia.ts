@@ -29,7 +29,7 @@ export const useCartStore = defineStore("cart", {
 
       cartItem.quantity--;
     },
-    [ECartActions.RemoveProductFromCart](cart_id: string): void {
+    [ECartActions.RemoveProductFromCart](cart_id: string | null): void {
       const cartItemIndex = this.cart.findIndex(
         (cartItem) => cartItem.cart_id === cart_id,
       );

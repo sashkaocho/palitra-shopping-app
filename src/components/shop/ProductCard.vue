@@ -21,11 +21,16 @@ const goToProductPage = (): void => {
 
 <template>
   <article
-    class="h-96 rounded-lg cursor-pointer box-shadow-all-sides"
+    class="h-[500px] rounded-lg cursor-pointer box-shadow-all-sides"
     @click="goToProductPage"
   >
     <div v-if="!props.image" class="w-full h-72 bg-blue-500 rounded-t-lg"></div>
-    <img v-else :src="image" alt="not found" class="w-full h-72 rounded-t-lg" />
+    <img
+      v-else
+      :src="image"
+      alt="not found"
+      class="w-full h-96 rounded-t-lg object-cover"
+    />
     <section class="flex flex-col p-3 gap-2">
       <p>{{ props.name }}</p>
       <h3 class="font-semibold">{{ props.price }}$</h3>
