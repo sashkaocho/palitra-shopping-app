@@ -5,6 +5,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useProductStore } from "../pinia/products.pinia.ts";
 import { IProduct } from "../ts/interfaces/product.interface.ts";
 import axios from "axios";
+import BaseNavButton from "../components/base/BaseNavButton.vue";
+import { ENavArrow } from "../ts/enums/application.enum.ts";
 
 const router = useRouter();
 const route = useRoute();
@@ -69,18 +71,20 @@ watch(
       />
     </section>
     <section class="flex items-center justify-center gap-8">
-      <button
-        class="w-12 h-12 flex justify-center items-center bg-primary rounded-full cursor-pointer transition-all hover:bg-light-blue"
+      <BaseNavButton
+        :arrow="ENavArrow.left"
+        :height="12"
+        :width="12"
+        rounded="full"
         @click.left="goPreviousPage"
-      >
-        <i class="fa-solid fa-angle-left text-white text-xl"></i>
-      </button>
-      <button
-        class="w-12 h-12 flex justify-center items-center bg-primary rounded-full cursor-pointer transition-all hover:bg-light-blue"
+      />
+      <BaseNavButton
+        :arrow="ENavArrow.right"
+        :height="12"
+        :width="12"
+        rounded="full"
         @click.left="goNextPage"
-      >
-        <i class="fa-solid fa-angle-right text-white text-xl"></i>
-      </button>
+      />
     </section>
   </main>
 </template>
