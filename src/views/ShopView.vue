@@ -34,12 +34,15 @@ const goNextPage = (): void => {
   if (nextPageStartIndex >= productStore.products.length) {
     return;
   }
+
+  window.scrollTo(0, 0);
   router.push({ name: "shop", query: { page: currentPage.value + 1 } });
 };
 
 const goPreviousPage = (): void => {
   if (currentPage.value === 1) return;
 
+  window.scrollTo(0, 0);
   router.push({ name: "shop", query: { page: currentPage.value - 1 } });
 };
 
