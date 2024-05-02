@@ -13,7 +13,6 @@ const cart = computed<IProduct[]>(() => cartStore[ECartGetters.GetCart]);
 const totalPrice = computed<number>(() => {
   let totalPrice = 0;
   for (let i = 0; i < cart.value.length; i++) {
-    console.log(cart.value[i].price);
     totalPrice += cart.value[i].price * cart.value[i]?.quantity;
   }
   return totalPrice;
