@@ -30,6 +30,10 @@ onMounted(async (): Promise<void> => {
 });
 
 const goNextPage = (): void => {
+  const nextPageStartIndex = currentPage.value * 6;
+  if (nextPageStartIndex >= productStore.products.length) {
+    return;
+  }
   router.push({ name: "shop", query: { page: currentPage.value + 1 } });
 };
 
@@ -50,18 +54,30 @@ watch(
 </script>
 
 <template>
-  <main class="grid grid-cols-3 gap-y-3 gap-x-4">
-    <ProductCard
-      v-for="product in currentPageProducts"
-      :id="product._id"
-      :key="product._id"
-      :image="product.gallery[0]"
-      :name="product.name"
-      :price="product.price"
-    />
+  <main class="flex flex-col justify-center gap-12">
+    <section class="grid grid-cols-3 gap-y-5 gap-x-5">
+      <ProductCard
+        v-for="product in currentPageProducts"
+        :id="product._id"
+        :key="product._id"
+        :image="product.gallery[0]"
+        :name="product.name"
+        :price="product.price"
+      />
+    </section>
+    <section class="flex items-center justify-center gap-8">
+      <button
+        class="w-12 h-12 flex justify-center items-center bg-primary rounded-full cursor-pointer transition-all hover:bg-light-blue"
+        @click.left="goPreviousPage"
+      >
+        <i class="fa-solid fa-angle-left text-white text-xl"></i>
+      </button>
+      <button
+        class="w-12 h-12 flex justify-center items-center bg-primary rounded-full cursor-pointer transition-all hover:bg-light-blue"
+        @click.left="goNextPage"
+      >
+        <i class="fa-solid fa-angle-right text-white text-xl"></i>
+      </button>
+    </section>
   </main>
-  <section class="flex items-center justify-center gap-3 pb-8">
-    <div class="cursor-pointer" @click.left="goPreviousPage">previous page</div>
-    <div class="cursor-pointer" @click.left="goNextPage">next page</div>
-  </section>
 </template>
